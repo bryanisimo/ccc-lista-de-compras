@@ -25,8 +25,11 @@ function escribeLista(){
   var elemento = prompt("Ingresa el nuevo ingrediente");
   if( elemento ){
     shopping.push( elemento );
-  }
+    renderizaLista();
 
+  }
+}
+function renderizaLista(){
   var indice = 0;
   var indice_maximo = shopping.length;
 
@@ -36,24 +39,35 @@ function escribeLista(){
   // for( indice = 0; indice < indice_maximo; indice++ )
   while( indice < indice_maximo ){
 
-    // ESCRBIR EN LA LISTA
-    // document.getElementById('lista').innerHTML =
-    //            document.getElementById('lista').innerHTML +
-    //            "<li>" + shopping[ indice ] + "</li>";
-
-    // $('#lista').append(   "<li>" + shopping[ indice ] + "</li>" );
-
-    var li = document.createElement('li');
-    var text = document.createTextNode( shopping[indice] );
-    li.appendChild(text);
-    document.getElementById('lista').appendChild( li );
-
+    $('#lista').append(
+      "<li class='list-group-item'>" +
+        shopping[ indice ] +
+        "<button class='btn btn-danger btn-sm float-right eliminar'><i class='fas fa-times-circle'></i></button>" +
+      "</li>"
+    );
 
     indice++;
   }
 
 }
+$(document).ready(function(){
+
+  $('#lista')
+  .delegate('button.eliminar','mouseenter',function( event ){
+    event.preventDefault();
+    // var indice = $(this).parent().index();
+    $(this).parent().addClass('resaltado');
+  });
+
+  $('#lista')
+  .delegate('button.eliminar','mouseleave',function( event ){
+    event.preventDefault();
+    // var indice = $(this).parent().index();
+    $(this).parent().removeClass('resaltado');
+  });
 
 
+
+})
 document.getElementById('agregar').addEventListener('click', escribeLista);
-escribeLista();
+renderizaLista();
