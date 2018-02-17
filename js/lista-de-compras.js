@@ -31,12 +31,24 @@ function escribeLista(){
   var indice_maximo = shopping.length;
 
   document.getElementById('lista').innerHTML = "";
+
+  // shopping.foreach(function(){})
+  // for( indice = 0; indice < indice_maximo; indice++ )
   while( indice < indice_maximo ){
 
     // ESCRBIR EN LA LISTA
-    document.getElementById('lista').innerHTML =
-                document.getElementById('lista').innerHTML +
-                "<li>" + shopping[ indice ] + "</li>"
+    // document.getElementById('lista').innerHTML =
+    //            document.getElementById('lista').innerHTML +
+    //            "<li>" + shopping[ indice ] + "</li>";
+
+    // $('#lista').append(   "<li>" + shopping[ indice ] + "</li>" );
+
+    var li = document.createElement('li');
+    var text = document.createTextNode( shopping[indice] );
+    li.appendChild(text);
+    document.getElementById('lista').appendChild( li );
+
+
     indice++;
   }
 
