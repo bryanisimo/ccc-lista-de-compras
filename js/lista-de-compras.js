@@ -1,24 +1,11 @@
 var shopping = [];
 
-
-
 shopping[0] = "Sandwitch";
 shopping[1] = "Jitomates";
 shopping[2] = "Cebolla";
 shopping[3] = "Cereal";
 shopping[4] = "Leche";
 shopping[5] = "Huevo";
-shopping[6] = "Catsup";
-shopping[7] = "Carne";
-shopping[8] = "Pan";
-shopping[9] = "Yogurth";
-shopping[10] = "Cerveza";
-shopping[11] = "Shampoo";
-shopping[12] = "Limones";
-shopping[13] = "Café";
-shopping[14] = "Azucar";
-shopping[15] = "Té";
-
 // $('#agregar').on('click',function(){})
 
 function escribeLista(){
@@ -53,17 +40,35 @@ function renderizaLista(){
 $(document).ready(function(){
 
   $('#lista')
+  .delegate('li','mouseenter',function( event ){
+    event.preventDefault();
+    $(this).addClass('resaltado');
+  });
+
+  $('#lista')
+  .delegate('li','mouseleave',function( event ){
+    event.preventDefault();
+    $(this).removeClass('resaltado');
+  });
+
+  $('#lista')
   .delegate('button.eliminar','mouseenter',function( event ){
     event.preventDefault();
-    // var indice = $(this).parent().index();
-    $(this).parent().addClass('resaltado');
+    $(this).parent().addClass('bg-warning');
   });
 
   $('#lista')
   .delegate('button.eliminar','mouseleave',function( event ){
     event.preventDefault();
-    // var indice = $(this).parent().index();
-    $(this).parent().removeClass('resaltado');
+    $(this).parent().removeClass('bg-warning');
+  });
+
+  $('#lista')
+  .delegate('button.eliminar','click',function( event ){
+    event.preventDefault();
+    var indice = $(this).parent().index();
+    // shopping = shopping.slice( indice );
+    renderizaLista();
   });
 
 
